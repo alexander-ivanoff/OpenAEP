@@ -273,7 +273,7 @@ This request is used by distributor store to sign inApp purchase in source store
 #####Request
 POST request with XML **receipt** object. It contains three attributes:
 
- - **receipt-data** - Purchase receipt. String in JSON format with following fields: appstoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload. 
+ - **receipt-data** - Purchase receipt. String in JSON format with following fields: distributorStoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload. 
  <i>Should not contain spaces, newlines, etc. to avoid errors in signature calculation.</i>
  - **distributor-appstore** - unique appstoreId of destributor store.
  - **distributor-signature** - the receipt-data signed with distributors private key
@@ -288,13 +288,13 @@ requestBody:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <receipt version="1" 
-	receipt-data='{"appstoreId":"com.destributorstore","orderId":"com.example.app","packageName":"com.example.app","productId":"exampleSku","purchaseTime":1345678900000,"purchaseToken":"122333444455555","developerPayload":"example developer payload"}' 
+	receipt-data='{"distributorStoreId":"com.distributorstore","orderId":"com.example.app","packageName":"com.example.app","productId":"exampleSku","purchaseTime":1345678900000,"purchaseToken":"122333444455555","developerPayload":"example developer payload", "purchaseState":0}' 
 	distributor-appstore='com.distributorstore' 
 	distributor-signature='+SzBm0wi8xECuGkKw97wnkSZ/62sxU+6Hq6a7qojIVE='/>
 ```
 
 #####Response
- - **receipt-data** - Purchase receipt. String in JSON format with following fields: appstoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload. 
+ - **receipt-data** - Purchase receipt. String in JSON format with following fields: distributorStoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload. Also sorce store should add it unique id to response before signing response - 'developerStoreId'
  <i>Should not contain spaces, newlines, etc. to avoid errors in signature calculation.</i>
  - **developer-appstore** - unique appstoreId of source store.
  - **developer-signature** - the receipt-data signed by source store with application specific key.
@@ -302,7 +302,7 @@ requestBody:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <receipt version="1" 
-	receipt-data='{"appstoreId":"com.destributorstore","orderId":"com.example.app","packageName":"com.example.app","productId":"exampleSku","purchaseTime":1345678900000,"purchaseToken":"122333444455555","developerPayload":"example developer payload"}' 
+	receipt-data='{"developerStoreId":"com.sourcestore","distributorStoreId":"com.destributorstore","orderId":"com.example.app","packageName":"com.example.app","productId":"exampleSku","purchaseTime":1345678900000,"purchaseToken":"122333444455555","developerPayload":"example developer payload", "purchaseState":0}' 
 	developer-appstore='com.sourcestore' 
 	developer-signature='dD80ihBh5jfNpymO5Hg1IdiJIEvHcJpCMiCMnN/RnbI='/>
 ```
@@ -310,8 +310,8 @@ requestBody:
 Status
 -------------
 Current status: draft
-Specification version: 0.83
-Last update: April 15, 2014  
+Specification version: 0.84
+Last update: May 30, 2014  
 
 License
 -------------
