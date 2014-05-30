@@ -294,7 +294,7 @@ requestBody:
 ```
 
 #####Response
- - **receipt-data** - Purchase receipt. String in JSON format with following fields: distributorStoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload. Also sorce store should add it unique id to response before signing response - 'developerStoreId'
+ - **receipt-data** -  Source store should add its unique id to receipt before sign it - 'developerStoreId', to exist fields: distributorStoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload.
  <i>Should not contain spaces, newlines, etc. to avoid errors in signature calculation.</i>
  - **developer-appstore** - unique appstoreId of source store.
  - **developer-signature** - the receipt-data signed by source store with application specific key.
