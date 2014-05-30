@@ -273,7 +273,7 @@ This request is used by distributor store to sign inApp purchase in source store
 #####Request
 POST request with XML **receipt** object. It contains three attributes:
 
- - **receipt-data** - Purchase receipt. String in JSON format with following fields: distributorStoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload. 
+ - **receipt-data** - Purchase receipt. String in JSON format with following fields: distributorStoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload, purchaseState. 
  <i>Should not contain spaces, newlines, etc. to avoid errors in signature calculation.</i>
  - **distributor-appstore** - unique appstoreId of destributor store.
  - **distributor-signature** - the receipt-data signed with distributors private key
@@ -294,7 +294,7 @@ requestBody:
 ```
 
 #####Response
- - **receipt-data** -  Source store should add its unique id to receipt before sign it - 'developerStoreId', to exist fields: distributorStoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload.
+ - **receipt-data** -  Source store should add its unique id to receipt before sign it - 'developerStoreId', in addition to exist fields: distributorStoreId, orderId, packageName, productId, purchaseTime, purchaseToken, developerPayload, purchaseState.
  <i>Should not contain spaces, newlines, etc. to avoid errors in signature calculation.</i>
  - **developer-appstore** - unique appstoreId of source store.
  - **developer-signature** - the receipt-data signed by source store with application specific key.
